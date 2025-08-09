@@ -74,8 +74,14 @@ pnpm install
 
 3. Create .env file
 
-Using the .env.template file as a template, create a .env file in the root of the project.
+Using the .env.template file as a template, create a .env file in the `apps/expo-app` directory
 
+First:
+```bash
+cd apps/expo-app
+```
+
+Second:
 ```bash
 cp .env.template .env
 ```
