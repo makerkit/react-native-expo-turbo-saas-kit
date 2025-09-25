@@ -1,7 +1,7 @@
 {
   "name": "react-native-expo-supabase-starter-kit",
   "private": true,
-  "packageManager": "pnpm@9.12.0",
+  "packageManager": "pnpm@10.17.1",
   "engines": {
     "node": ">=18"
   },
@@ -22,7 +22,9 @@
     "supabase:web:stop": "pnpm --filter app supabase:stop",
     "supabase:web:typegen": "pnpm --filter app supabase:typegen",
     "supabase:web:reset": "pnpm --filter app supabase:reset",
-    "stripe:listen": "pnpm --filter '@kit/stripe' start"
+    "stripe:listen": "pnpm --filter '@kit/stripe' start",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
   },
   "devDependencies": {
     "@manypkg/cli": "catalog:",
