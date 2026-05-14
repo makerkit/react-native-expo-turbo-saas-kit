@@ -15,6 +15,7 @@
     "@kit/tailwind-config": "workspace:*",
     "@kit/typescript-config": "workspace:*",
     "@types/aes-js": "catalog:",
+    "@types/node": "catalog:",
     "zod": "catalog:"
   },
   "dependencies": {

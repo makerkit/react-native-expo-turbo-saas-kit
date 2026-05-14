@@ -17,7 +17,7 @@
     "jsx": "preserve",
     "incremental": true,
     "noUncheckedIndexedAccess": true,
-    "types": ["nativewind/types"]
+    "types": ["nativewind/types", "node"]
   },
   "exclude": ["node_modules", "build", "dist"]
 }

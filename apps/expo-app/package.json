@@ -8,11 +8,12 @@
     "start": "expo start",
     "dev": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint && eslint .",
+    "doctor": "expo-doctor",
     "typecheck": "tsc --noEmit",
     "supabase": "supabase",
     "supabase:start": "supabase status || supabase start",
@@ -31,6 +32,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo/metro-runtime": "catalog:",
     "@expo/vector-icons": "catalog:",
     "@kit/account": "workspace:*",
     "@kit/auth": "workspace:*",
@@ -41,6 +43,7 @@
     "@tanstack/react-query": "catalog:",
     "expo": "catalog:",
     "expo-constants": "catalog:",
+    "expo-crypto": "catalog:",
     "expo-dev-client": "catalog:",
     "expo-font": "catalog:",
     "expo-linking": "catalog:",
@@ -59,7 +62,8 @@
     "react-native-safe-area-context": "catalog:",
     "react-native-screens": "catalog:",
     "react-native-svg": "catalog:",
-    "react-native-web": "catalog:"
+    "react-native-web": "catalog:",
+    "react-native-worklets": "catalog:"
   },
   "devDependencies": {
     "@babel/core": "catalog:",
@@ -72,6 +76,7 @@
     "@types/react-test-renderer": "catalog:",
     "babel-plugin-module-resolver": "catalog:",
     "eslint-config-expo": "catalog:",
+    "expo-doctor": "catalog:",
     "jest": "catalog:",
     "jest-expo": "catalog:",
     "nativewind": "catalog:",
