@@ -1,89 +1,64 @@
-import React, { useMemo } from 'react';
-
-import { View, ViewProps } from 'react-native';
+import { Children, isValidElement, useMemo, type ReactNode } from 'react';
+import { View, type ViewProps } from 'react-native';
 
 import { cn } from '../../lib/utils';
 import { Text } from './text';
 
-interface AlertProps extends ViewProps {
-  children: React.ReactNode;
-}
-
+type AlertProps = ViewProps & { children: ReactNode };
 type AlertTitleProps = React.ComponentProps<typeof Text>;
 type AlertDescriptionProps = React.ComponentProps<typeof Text>;
 type AlertIconProps = React.ComponentProps<typeof View>;
 type AlertActionsProps = React.ComponentProps<typeof View>;
 
-export function Alert({ children, className, ...props }: AlertProps) {
-  const components = useMemo(
-    () => React.Children.toArray(children),
-    [children],
-  );
+function Alert({ children, className, ...props }: AlertProps) {
+  const items = useMemo(() => Children.toArray(children), [children]);
 
-  const Title = components.find(
-    (child) => React.isValidElement(child) && child.type === AlertTitle,
+  const icon = items.find((c) => isValidElement(c) && c.type === AlertIcon);
+  const title = items.find((c) => isValidElement(c) && c.type === AlertTitle);
+  const description = items.find(
+    (c) => isValidElement(c) && c.type === AlertDescription,
   );
-
-  const Description = components.find(
-    (child) => React.isValidElement(child) && child.type === AlertDescription,
-  );
-
-  const Actions = components.find(
-    (child) => React.isValidElement(child) && child.type === AlertActions,
-  );
-
-  const Icon = components.find(
-    (child) => React.isValidElement(child) && child.type === AlertIcon,
+  const actions = items.find(
+    (c) => isValidElement(c) && c.type === AlertActions,
   );
 
   return (
     <View
       className={cn(
-        `border-border flex-col items-center justify-center gap-4 rounded-lg border p-8`,
+        'border-border flex-col items-center justify-center gap-4 rounded-lg border p-8',
         className,
       )}
       {...props}
     >
-      {Icon}
-
-      <View className={'flex-col items-center gap-1'}>
-        {Title}
-        {Description}
+      {icon}
+      <View className="flex-col items-center gap-1">
+        {title}
+        {description}
       </View>
-
-      {Actions}
+      {actions}
     </View>
   );
 }
 
-export function AlertTitle({ children, className, ...props }: AlertTitleProps) {
+function AlertTitle({ className, ...props }: AlertTitleProps) {
   return (
-    <Text className={cn('text-center font-semibold', className)} {...props}>
-      {children}
-    </Text>
+    <Text
+      className={cn('text-center font-semibold', className)}
+      {...props}
+    />
   );
 }
 
-export function AlertDescription({
-  children,
-  className,
-  ...props
-}: AlertDescriptionProps) {
+function AlertDescription({ className, ...props }: AlertDescriptionProps) {
   return (
     <Text
       className={cn('text-muted-foreground text-center text-sm', className)}
       {...props}
-    >
-      {children}
-    </Text>
+    />
   );
 }
 
-export function AlertActions({
-  children,
-  className,
-  ...props
-}: AlertActionsProps) {
+function AlertActions({ className, children, ...props }: AlertActionsProps) {
   return (
     <View className={cn('flex-row gap-4', className)} {...props}>
       {children}
@@ -91,6 +66,8 @@ export function AlertActions({
   );
 }
 
-export function AlertIcon({ children, className }: AlertIconProps) {
+function AlertIcon({ children, className }: AlertIconProps) {
   return <View className={className}>{children}</View>;
 }
+
+export { Alert, AlertActions, AlertDescription, AlertIcon, AlertTitle };

@@ -26,7 +26,8 @@
     "zod": "catalog:"
   },
   "dependencies": {
-    "expo-document-picker": "catalog:"
+    "expo-document-picker": "catalog:",
+    "expo-linking": "catalog:"
   },
   "eslintConfig": {
     "root": true,

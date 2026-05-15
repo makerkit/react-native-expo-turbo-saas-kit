@@ -16,7 +16,9 @@ import {
   CardTitle,
   Input,
   LoadingOverlay,
+  onValidationErrors,
   Text,
+  toast,
 } from '@kit/ui';
 
 import { useFetchAccount } from '../lib/hooks/use-fetch-profile';
@@ -113,7 +115,10 @@ function UpdateProfileNameForm(props: { data: Tables<'accounts'> }) {
         <Button
           size={'lg'}
           disabled={mutation.isPending}
-          onPress={form.handleSubmit((data) => mutation.mutateAsync(data))}
+          onPress={form.handleSubmit(
+            (data) => mutation.mutateAsync(data),
+            onValidationErrors((message) => toast.error(message)),
+          )}
         >
           <Text>Update your name</Text>
         </Button>

@@ -10,29 +10,33 @@ catalog:
   "@manypkg/cli": ^0.25.1
   "@react-native-async-storage/async-storage": 2.2.0
   "@react-navigation/native": ^7.2.4
-  "@rn-primitives/accordion": ^1.1.0
-  "@rn-primitives/alert-dialog": ^1.1.0
-  "@rn-primitives/avatar": ^1.1.0
-  "@rn-primitives/checkbox": ^1.1.0
-  "@rn-primitives/collapsible": ^1.1.0
-  "@rn-primitives/dialog": ^1.1.0
-  "@rn-primitives/dropdown-menu": ^1.1.0
-  "@rn-primitives/hover-card": ^1.1.0
-  "@rn-primitives/label": ^1.1.0
-  "@rn-primitives/menubar": ^1.1.0
-  "@rn-primitives/navigation-menu": ^1.1.0
-  "@rn-primitives/popover": ^1.1.0
-  "@rn-primitives/progress": ^1.1.0
-  "@rn-primitives/radio-group": ^1.1.0
-  "@rn-primitives/select": ^1.1.0
-  "@rn-primitives/separator": ^1.1.0
-  "@rn-primitives/slot": ^1.1.0
-  "@rn-primitives/switch": ^1.1.0
-  "@rn-primitives/table": ^1.1.0
-  "@rn-primitives/tabs": ^1.1.0
-  "@rn-primitives/toggle": ^1.1.0
-  "@rn-primitives/toggle-group": ^1.1.0
-  "@rn-primitives/types": ^1.1.0
+  "@rn-primitives/accordion": ^1.4.0
+  "@rn-primitives/alert-dialog": ^1.4.0
+  "@rn-primitives/aspect-ratio": ^1.4.0
+  "@rn-primitives/avatar": ^1.4.0
+  "@rn-primitives/checkbox": ^1.4.0
+  "@rn-primitives/collapsible": ^1.4.0
+  "@rn-primitives/context-menu": ^1.4.0
+  "@rn-primitives/dialog": ^1.4.0
+  "@rn-primitives/dropdown-menu": ^1.4.0
+  "@rn-primitives/hover-card": ^1.4.0
+  "@rn-primitives/label": ^1.4.0
+  "@rn-primitives/menubar": ^1.4.0
+  "@rn-primitives/navigation-menu": ^1.4.0
+  "@rn-primitives/popover": ^1.4.0
+  "@rn-primitives/portal": ^1.4.0
+  "@rn-primitives/progress": ^1.4.0
+  "@rn-primitives/radio-group": ^1.4.0
+  "@rn-primitives/select": ^1.4.0
+  "@rn-primitives/separator": ^1.4.0
+  "@rn-primitives/slot": ^1.4.0
+  "@rn-primitives/switch": ^1.4.0
+  "@rn-primitives/table": ^1.4.0
+  "@rn-primitives/tabs": ^1.4.0
+  "@rn-primitives/toggle": ^1.4.0
+  "@rn-primitives/toggle-group": ^1.4.0
+  "@rn-primitives/tooltip": ^1.4.0
+  "@rn-primitives/types": ^1.4.0
   "@supabase/supabase-js": ^2.105.4
   "@tanstack/react-query": ^5.100.10
   "@trivago/prettier-plugin-sort-imports": ^6.0.2
@@ -60,7 +64,7 @@ catalog:
   expo-auth-session: ~55.0.16
   expo-constants: ~55.0.16
   expo-crypto: ~55.0.15
-  expo-dev-client: ~55.0.33
+  expo-dev-client: ~55.0.34
   expo-doctor: ^1.18.22
   expo-document-picker: ~55.0.13
   expo-font: ~55.0.7
@@ -75,7 +79,7 @@ catalog:
   jest-expo: ~55.0.17
   lucide-react-native: ^1.16.0
   metro-cache: ~0.84.4
-  nativewind: 4.1.23
+  nativewind: 4.2.2
   prettier: ^3.8.3
   prettier-plugin-tailwindcss: ^0.6.14
   react: 19.2.0
@@ -95,7 +99,7 @@ catalog:
   sonner: ^1.7.4
   sonner-native: ^0.16.2
   supabase: ^2.98.2
-  tailwind-merge: ^2.6.1
+  tailwind-merge: ^3.5.0
   tailwindcss: ^3.4.19
   tailwindcss-animate: ^1.0.7
   turbo: ^2.9.12

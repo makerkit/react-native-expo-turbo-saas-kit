@@ -1,27 +1,42 @@
-import * as React from 'react';
-
-import { TextInput } from 'react-native';
+import { Platform, TextInput } from 'react-native';
 
 import { cn } from '../../lib/utils';
 
-const Input = React.forwardRef<
-  React.ElementRef<typeof TextInput>,
-  React.ComponentPropsWithoutRef<typeof TextInput>
->(({ className, placeholderClassName, ...props }, ref) => {
+// Kit extension: default autoCapitalize='none', autoCorrect=false
+function Input({
+  className,
+  autoCapitalize = 'none',
+  autoCorrect = false,
+  ...props
+}: React.ComponentProps<typeof TextInput> & React.RefAttributes<TextInput>) {
   return (
     <TextInput
-      ref={ref}
+      autoCapitalize={autoCapitalize}
+      autoCorrect={autoCorrect}
       className={cn(
-        'web:flex native:h-12 web:w-full border-input bg-background web:py-2 native:text-lg native:leading-[1.25] text-foreground placeholder:text-muted-foreground web:ring-offset-background web:focus-visible:outline-none web:focus-visible:ring-2 web:focus-visible:ring-ring web:focus-visible:ring-offset-2 h-10 rounded-md border px-3 text-base file:border-0 file:bg-transparent file:font-medium lg:text-sm',
-        props.editable === false && 'web:cursor-not-allowed opacity-50',
+        // Kit extension: native:h-12, native:text-lg, native:leading-[1.25]
+        'dark:bg-input/30 border-input bg-background text-foreground native:h-12 native:text-lg native:leading-[1.25] flex h-10 w-full min-w-0 flex-row items-center rounded-md border px-3 py-1 text-base leading-5 shadow-sm shadow-black/5 sm:h-9',
+        props.editable === false &&
+          cn(
+            'opacity-50',
+            Platform.select({
+              web: 'disabled:pointer-events-none disabled:cursor-not-allowed',
+            }),
+          ),
+        Platform.select({
+          web: cn(
+            'placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground outline-none transition-[color,box-shadow] md:text-sm',
+            'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+            'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
+          ),
+          // Kit extension: placeholder:text-muted-foreground (full opacity, not upstream's /50)
+          native: 'placeholder:text-muted-foreground',
+        }),
         className,
       )}
-      placeholderClassName={cn('text-muted-foreground', placeholderClassName)}
       {...props}
     />
   );
-});
-
-Input.displayName = 'Input';
+}
 
 export { Input };

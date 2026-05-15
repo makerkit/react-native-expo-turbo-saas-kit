@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
 import { useRequestResetPassword } from '@kit/supabase';
-import { Button, Input, Text, toast } from '@kit/ui';
+import { Button, Input, onValidationErrors, Text, toast } from '@kit/ui';
 
 import { EmailSchema } from '../lib/schema';
 
@@ -47,7 +47,7 @@ export function EmailPasswordResetForm() {
             });
 
             toast.success('We sent you an email to reset your password.');
-          })}
+          }, onValidationErrors((message) => toast.error(message)))}
         >
           <Text>Request Password Reset</Text>
         </Button>
