@@ -1,6 +1,8 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { Database, useSupabase } from '@kit/supabase';
+
+import { accountQueryKey } from './use-fetch-profile';
 
 type UpdateData = Database['public']['Tables']['accounts']['Update'];
 
@@ -12,6 +14,7 @@ type UpdateData = Database['public']['Tables']['accounts']['Update'];
  */
 export function useUpdateAccountDataMutation(accountId: string) {
   const client = useSupabase();
+  const queryClient = useQueryClient();
 
   const mutationKey = ['account:data', accountId];
 
@@ -30,5 +33,10 @@ export function useUpdateAccountDataMutation(accountId: string) {
   return useMutation({
     mutationKey,
     mutationFn,
+    onSuccess: () => {
+      return queryClient.invalidateQueries({
+        queryKey: accountQueryKey(accountId),
+      });
+    },
   });
 }

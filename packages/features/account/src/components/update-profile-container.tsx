@@ -16,8 +16,8 @@ import {
   CardTitle,
   Input,
   LoadingOverlay,
-  onValidationErrors,
   Text,
+  onValidationErrors,
   toast,
 } from '@kit/ui';
 
@@ -86,7 +86,14 @@ function UpdateProfileForm(props: { data: Tables<'accounts'> }) {
 
 function UpdateProfileNameForm(props: { data: Tables<'accounts'> }) {
   const form = useForm({
-    resolver: zodResolver(z.object({ name: z.string().min(2).max(255) })),
+    resolver: zodResolver(
+      z.object({
+        name: z
+          .string()
+          .min(2, 'Name must be at least 2 characters')
+          .max(255, 'Name must be at most 255 characters'),
+      }),
+    ),
     defaultValues: {
       name: props.data.name,
     },
@@ -116,7 +123,17 @@ function UpdateProfileNameForm(props: { data: Tables<'accounts'> }) {
           size={'lg'}
           disabled={mutation.isPending}
           onPress={form.handleSubmit(
-            (data) => mutation.mutateAsync(data),
+            (data) => {
+              mutation.mutate(data, {
+                onSuccess: () => {
+                  toast.success('Name updated successfully');
+                  form.reset(data);
+                },
+                onError: (error) => {
+                  toast.error(error.message || 'Something went wrong');
+                },
+              });
+            },
             onValidationErrors((message) => toast.error(message)),
           )}
         >
