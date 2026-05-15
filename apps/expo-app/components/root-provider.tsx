@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Platform } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { Toaster } from '@kit/ui';
@@ -22,7 +23,14 @@ export function RootProvider({ children }: { children: React.ReactNode }) {
         <GlobalThemeProvider>
           {children}
 
-          <Toaster />
+          <Toaster
+            position="bottom-center"
+            offset={40}
+            swipeToDismissDirection="left"
+            duration={3500}
+            theme="system"
+            enableStacking={Platform.OS === 'ios'}
+          />
         </GlobalThemeProvider>
       </QueryClientProvider>
     </GestureHandlerRootView>

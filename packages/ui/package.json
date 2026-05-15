@@ -60,7 +60,6 @@
     "react-hook-form": "catalog:",
     "react-native-reanimated": "catalog:",
     "react-native-svg": "catalog:",
-    "sonner": "catalog:",
     "sonner-native": "catalog:",
     "tailwind-merge": "catalog:"
   },
