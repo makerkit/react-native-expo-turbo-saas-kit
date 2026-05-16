@@ -31,7 +31,10 @@ export function useUpdateAvatar(userId: string) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ uri, previousPictureUrl }: UpdateAvatarInput) => {
+    mutationFn: async ({
+      uri,
+      previousPictureUrl,
+    }: UpdateAvatarInput): Promise<string | null> => {
       if (previousPictureUrl) {
         await deleteAvatarObject(client, previousPictureUrl);
       }
@@ -42,7 +45,7 @@ export function useUpdateAvatar(userId: string) {
           .update({ picture_url: null })
           .eq('id', userId)
           .throwOnError();
-        return;
+        return null;
       }
 
       const publicUrl = await uploadAvatarBytes(client, uri, userId);
@@ -52,9 +55,15 @@ export function useUpdateAvatar(userId: string) {
         .update({ picture_url: publicUrl })
         .eq('id', userId)
         .throwOnError();
+
+      return publicUrl;
     },
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: accountQueryKey(userId) }),
+    onSuccess: (newPictureUrl) => {
+      queryClient.setQueryData<{ picture_url: string | null } | null>(
+        accountQueryKey(userId),
+        (prev) => (prev ? { ...prev, picture_url: newPictureUrl } : prev),
+      );
+    },
   });
 }
 

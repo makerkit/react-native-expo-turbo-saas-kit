@@ -59,6 +59,7 @@
     "react": "catalog:",
     "react-hook-form": "catalog:",
     "react-native-reanimated": "catalog:",
+    "react-native-screens": "catalog:",
     "react-native-svg": "catalog:",
     "sonner-native": "catalog:",
     "tailwind-merge": "catalog:"
