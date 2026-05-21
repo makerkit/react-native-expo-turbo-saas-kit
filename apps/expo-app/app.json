@@ -7,7 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "com.supabase",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -21,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.expo.expoapp"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +37,12 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow the app to access your photos so you can set a profile picture."
         }
       ]
     ],

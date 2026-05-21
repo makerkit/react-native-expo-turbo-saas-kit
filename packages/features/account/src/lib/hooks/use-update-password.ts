@@ -5,10 +5,10 @@ import { useSupabase } from '@kit/supabase';
 
 export const UpdatePasswordSchema = z
   .object({
-    password: z.string().min(8, 'Password must be at least 8 characters'),
+    password: z.string().min(8, 'New password must be at least 8 characters'),
     confirmPassword: z
       .string()
-      .min(8, 'Password must be at least 8 characters'),
+      .min(8, 'Password confirmation must be at least 8 characters'),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",

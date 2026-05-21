@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
-import { Button, Input, Text, toast } from '@kit/ui';
+import { Button, Input, onValidationErrors, Text, toast } from '@kit/ui';
 
 import {
   UpdatePasswordFormValues,
@@ -30,7 +30,9 @@ export function UpdatePasswordForm() {
           <Input
             secureTextEntry
             placeholder="Enter your new password"
-            {...field}
+            value={field.value}
+            onBlur={field.onBlur}
+            onChangeText={field.onChange}
           />
         )}
       />
@@ -42,7 +44,9 @@ export function UpdatePasswordForm() {
           <Input
             secureTextEntry
             placeholder="Confirm your new password"
-            {...field}
+            value={field.value}
+            onBlur={field.onBlur}
+            onChangeText={field.onChange}
           />
         )}
       />
@@ -55,11 +59,11 @@ export function UpdatePasswordForm() {
               toast.success('Password updated successfully');
               form.reset();
             },
-            onError: () => {
-              toast.error('Something went wrong');
+            onError: (error) => {
+              toast.error(error.message || 'Something went wrong');
             },
           });
-        })}
+        }, onValidationErrors((message) => toast.error(message)))}
       >
         <Text>
           {updatePasswordMutation.isPending ? 'Updating...' : 'Update Password'}

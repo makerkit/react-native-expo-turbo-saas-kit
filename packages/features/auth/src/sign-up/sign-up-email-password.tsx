@@ -11,6 +11,7 @@ import {
   Button,
   Check,
   Input,
+  onValidationErrors,
   Text,
   toast,
 } from '@kit/ui';
@@ -45,7 +46,7 @@ export function SignUpEmailPassword() {
       password: data.password,
       emailRedirectTo: deepLink,
     });
-  });
+  }, onValidationErrors((message) => toast.error(message)));
 
   return (
     <View className={'flex-col justify-center gap-4 p-8'}>

@@ -1,4 +1,3 @@
-import { Link } from 'expo-router';
 import { View } from 'react-native';
 
 import {
@@ -7,7 +6,7 @@ import {
   AlertDescription,
   AlertIcon,
   AlertTitle,
-  Button,
+  ButtonLink,
   Text,
   X,
 } from '@kit/ui';
@@ -30,11 +29,9 @@ export default function AuthErrorPage() {
         <AlertDescription>Please try again</AlertDescription>
 
         <AlertActions>
-          <Button variant={'outline'} asChild>
-            <Link href="/auth/sign-up">
-              <Text>Go back</Text>
-            </Link>
-          </Button>
+          <ButtonLink variant="outline" href="/auth/sign-up">
+            <Text>Go back</Text>
+          </ButtonLink>
         </AlertActions>
       </Alert>
     </View>

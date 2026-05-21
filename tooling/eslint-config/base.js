@@ -20,6 +20,7 @@ const config = {
   plugins: ["@typescript-eslint", "import"],
   rules: {
     "react/react-in-jsx-scope": "off",
+    "no-undef": "off",
     "turbo/no-undeclared-env-vars": "off",
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/no-unsafe-assignment": "off",

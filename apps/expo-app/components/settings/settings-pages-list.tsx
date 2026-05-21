@@ -4,7 +4,7 @@ import { Link } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
 import { FlatList, View } from 'react-native';
 
-import { Text } from '@kit/ui';
+import { Icon, Text } from '@kit/ui';
 
 import { SignOutButton } from './sign-out-button';
 
@@ -46,7 +46,7 @@ export function SettingsPagesList() {
               className={'h-full w-full flex-row items-center justify-between'}
             >
               <Text className={'text-lg'}>{item.title}</Text>
-              <ChevronRight className={'h-5'} />
+              <Icon as={ChevronRight} className="size-5 text-muted-foreground" />
             </View>
           </Link>
         )}

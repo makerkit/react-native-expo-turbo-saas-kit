@@ -1,50 +1,55 @@
-import * as React from 'react';
-
-import * as PopoverPrimitive from '@rn-primitives/popover';
-import { Platform, StyleSheet } from 'react-native';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
-
-import { cn } from '../../lib/utils';
+import { NativeOnlyAnimatedView } from './native-only-animated-view';
 import { TextClassContext } from './text';
+import { cn } from '../../lib/utils';
+import * as PopoverPrimitive from '@rn-primitives/popover';
+import * as React from 'react';
+import { Platform, StyleSheet } from 'react-native';
+import { FadeIn, FadeOut } from 'react-native-reanimated';
+import { FullWindowOverlay as RNFullWindowOverlay } from 'react-native-screens';
 
 const Popover = PopoverPrimitive.Root;
 
 const PopoverTrigger = PopoverPrimitive.Trigger;
 
-const PopoverContent = React.forwardRef<
-  React.ElementRef<typeof PopoverPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content> & {
+const FullWindowOverlay = Platform.OS === 'ios' ? RNFullWindowOverlay : React.Fragment;
+
+function PopoverContent({
+  className,
+  align = 'center',
+  sideOffset = 4,
+  portalHost,
+  ...props
+}: React.ComponentProps<typeof PopoverPrimitive.Content> & {
     portalHost?: string;
-  }
->(
-  (
-    { className, align = 'center', sideOffset = 4, portalHost, ...props },
-    ref,
-  ) => {
-    return (
-      <PopoverPrimitive.Portal hostName={portalHost}>
-        <PopoverPrimitive.Overlay
-          style={Platform.OS !== 'web' ? StyleSheet.absoluteFill : undefined}
-        >
-          <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut}>
+  }) {
+  return (
+    <PopoverPrimitive.Portal hostName={portalHost}>
+      <FullWindowOverlay>
+        <PopoverPrimitive.Overlay style={Platform.select({ native: StyleSheet.absoluteFill })}>
+          <NativeOnlyAnimatedView entering={FadeIn.duration(200)} exiting={FadeOut}>
             <TextClassContext.Provider value="text-popover-foreground">
               <PopoverPrimitive.Content
-                ref={ref}
                 align={align}
                 sideOffset={sideOffset}
                 className={cn(
-                  'web:cursor-auto border-border bg-popover shadow-foreground/5 web:outline-none web:data-[side=bottom]:slide-in-from-top-2 web:data-[side=left]:slide-in-from-right-2 web:data-[side=right]:slide-in-from-left-2 web:data-[side=top]:slide-in-from-bottom-2 web:animate-in web:zoom-in-95 web:fade-in-0 z-50 w-72 rounded-md border p-4 shadow-md',
-                  className,
+                  'bg-popover border-border outline-hidden z-50 w-72 rounded-md border p-4 shadow-md shadow-black/5',
+                  Platform.select({
+                    web: cn(
+                      'animate-in fade-in-0 zoom-in-95 origin-(--radix-popover-content-transform-origin) cursor-auto',
+                      props.side === 'bottom' && 'slide-in-from-top-2',
+                      props.side === 'top' && 'slide-in-from-bottom-2'
+                    ),
+                  }),
+                  className
                 )}
                 {...props}
               />
             </TextClassContext.Provider>
-          </Animated.View>
+          </NativeOnlyAnimatedView>
         </PopoverPrimitive.Overlay>
-      </PopoverPrimitive.Portal>
-    );
-  },
-);
-PopoverContent.displayName = PopoverPrimitive.Content.displayName;
+      </FullWindowOverlay>
+    </PopoverPrimitive.Portal>
+  );
+}
 
 export { Popover, PopoverContent, PopoverTrigger };

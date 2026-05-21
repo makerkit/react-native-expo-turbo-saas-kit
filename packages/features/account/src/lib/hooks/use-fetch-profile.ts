@@ -2,9 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 
 import { useSupabase } from '@kit/supabase';
 
+export const accountQueryKey = (userId: string | null | undefined) => [
+  'user',
+  'account',
+  userId,
+];
+
 export function useFetchAccount(userId: string | null | undefined) {
   const supabase = useSupabase();
-  const queryKey = ['user', 'account'];
 
   const queryFn = async () => {
     if (!userId) {
@@ -26,7 +31,7 @@ export function useFetchAccount(userId: string | null | undefined) {
   };
 
   return useQuery({
-    queryKey,
+    queryKey: accountQueryKey(userId),
     queryFn,
     enabled: !!userId,
   });

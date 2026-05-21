@@ -12,7 +12,9 @@ import {
   AlertTitle,
   Button,
   Input,
+  onValidationErrors,
   Text,
+  toast,
   X,
 } from '@kit/ui';
 
@@ -88,7 +90,7 @@ export function SignInEmailPassword() {
               email: data.email,
               password: data.password,
             });
-          })}
+          }, onValidationErrors((message) => toast.error(message)))}
         >
           <Text>Sign in</Text>
         </Button>

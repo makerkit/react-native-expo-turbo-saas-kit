@@ -1,9 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import * as Linking from 'expo-linking';
 import { Controller, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
 import { useUpdateUser } from '@kit/supabase';
-import { Button, Input, Text, toast } from '@kit/ui';
+import { Button, Input, onValidationErrors, Text, toast } from '@kit/ui';
 
 import { UpdateUserSchema } from '../lib/hooks/use-update-user';
 
@@ -23,7 +24,13 @@ export function UpdateEmailForm() {
         control={form.control}
         name="email"
         render={({ field }) => (
-          <Input inputMode={'email'} placeholder="Email" {...field} />
+          <Input
+            inputMode={'email'}
+            placeholder="Email"
+            value={field.value}
+            onBlur={field.onBlur}
+            onChangeText={field.onChange}
+          />
         )}
       />
 
@@ -31,21 +38,18 @@ export function UpdateEmailForm() {
         disabled={updateEmailMutation.isPending}
         onPress={form.handleSubmit((data) => {
           updateEmailMutation.mutate(
-            {
-              ...data,
-              redirectTo: `${window.location.origin}`,
-            },
+            { ...data, redirectTo: Linking.createURL('auth/callback') },
             {
               onSuccess: () => {
                 toast.success('Email updated successfully');
                 form.reset();
               },
-              onError: () => {
-                toast.error('Something went wrong');
+              onError: (error) => {
+                toast.error(error.message || 'Something went wrong');
               },
             },
           );
-        })}
+        }, onValidationErrors((message) => toast.error(message)))}
       >
         <Text>
           {updateEmailMutation.isPending ? 'Updating...' : 'Update Email'}

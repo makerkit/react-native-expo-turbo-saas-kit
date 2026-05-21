@@ -5,6 +5,9 @@
   "scripts": {
     "clean": "git clean -xdf .turbo node_modules"
   },
+  "dependencies": {
+    "@types/node": "catalog:"
+  },
   "files": [
     "base.json"
   ]

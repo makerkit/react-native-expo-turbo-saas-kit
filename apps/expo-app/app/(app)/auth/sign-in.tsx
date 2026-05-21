@@ -1,5 +1,3 @@
-import { Link } from 'expo-router';
-
 import {
   AuthPageLayout,
   AuthPageLayoutDescription,
@@ -9,7 +7,7 @@ import {
   AuthPageLayoutSecondaryButton,
   SignInForm,
 } from '@kit/auth';
-import { Button, Text } from '@kit/ui';
+import { ButtonLink, Text } from '@kit/ui';
 
 import { LogoImage } from '../../../components/logo';
 
@@ -31,11 +29,9 @@ export default function SignInPage() {
       </AuthPageLayoutForm>
 
       <AuthPageLayoutSecondaryButton>
-        <Button variant={'link'} asChild>
-          <Link className={'text-center'} href="/auth/sign-up">
-            <Text>Create an Account</Text>
-          </Link>
-        </Button>
+        <ButtonLink variant="link" href="/auth/sign-up">
+          <Text className="text-center">Create an Account</Text>
+        </ButtonLink>
       </AuthPageLayoutSecondaryButton>
     </AuthPageLayout>
   );

@@ -39,7 +39,9 @@ function MainLayoutTabs() {
         options={{
           title: 'Home',
           href: '/',
-          tabBarIcon: () => <HomeIcon className={'h-5'} />,
+          tabBarIcon: ({ color, size }) => (
+            <HomeIcon color={color} size={size} />
+          ),
         }}
       />
 
@@ -49,7 +51,9 @@ function MainLayoutTabs() {
           title: 'Settings',
           href: '/settings',
           headerShown: false,
-          tabBarIcon: () => <SettingsIcon className={'h-5'} />,
+          tabBarIcon: ({ color, size }) => (
+            <SettingsIcon color={color} size={size} />
+          ),
         }}
       />
     </Tabs>
